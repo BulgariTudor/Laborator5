@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+// Clasa de bază "Televizor"
+class Televizor {
+protected:
+    int dimensiune; // Dimensiunea ecranului în inch
+    bool esteHD; // Indicator pentru calitatea HD
+
+public:
+    // Constructorul clasei Televizor
+    Televizor(int dimensiune, bool esteHD) : dimensiune(dimensiune), esteHD(esteHD) {}
+
+    // Metoda pentru afișarea informațiilor despre televizor
+    void afiseazaInformatii() {
+        cout << "Televizor: Dimensiune ecran - " << dimensiune << " inch, Calitate HD - " << (esteHD ? "Da" : "Nu") << endl;
+    }
+};
+
+// Clasa "DispozitivDigital" care moștenește din clasa "Televizor"
+class DispozitivDigital : public Televizor {
+protected:
+    string tipConectivitate; // Tipul de conectivitate al dispozitivului digital
+
+public:
+    // Constructorul clasei DispozitivDigital
+    DispozitivDigital(int dimensiune, bool esteHD, string tipConectivitate) : Televizor(dimensiune, esteHD), tipConectivitate(tipConectivitate) {}
+
+    // Metoda pentru afișarea informațiilor despre dispozitivul digital
+    void afiseazaInformatii() {
+        cout << "Dispozitiv Digital: Dimensiune ecran - " << dimensiune << " inch, Calitate HD - " << (esteHD ? "Da" : "Nu") << ", Conectivitate - " << tipConectivitate << endl;
+    }
+};
+
+// Clasa "Monitor" care moștenește din clasa "DispozitivDigital"
+class Monitor : public DispozitivDigital {
+public:
+    // Constructorul clasei Monitor
+    Monitor(int dimensiune, bool esteHD, string tipConectivitate) : DispozitivDigital(dimensiune, esteHD, tipConectivitate) {}
+};
+
+// Funcția principală
+int main() {
+    // Crearea unui obiect de tip Monitor și afișarea informațiilor despre acesta
+    Monitor monitor1(24, true, "HDMI");
+    monitor1.afiseazaInformatii();
+
+    return 0;
+}
